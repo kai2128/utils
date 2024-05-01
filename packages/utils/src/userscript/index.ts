@@ -1,5 +1,4 @@
 export function waitForSecond(ms: number) {
-import { waitForSecond } from './index';
   return new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
@@ -100,7 +99,7 @@ export function triggerMouseEvent(node: Node, eventType = 'click') {
   const clickEvent = new MouseEvent(eventType, {
     bubbles: true,
     cancelable: false,
-  });
+  })
   node.dispatchEvent(clickEvent)
 }
 
