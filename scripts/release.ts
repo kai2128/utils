@@ -1,22 +1,25 @@
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import fs from 'fs-extra'
 
 import consola from 'consola'
 import { $ } from 'zx'
 import { getPkgRoot } from './utils'
 
+const __filename = fileURLToPath(import.meta.url) // get the resolved path to the file
+const __dirname = path.dirname(__filename) // get the name of the directory
+
 /**
  * get monorepo packages
  */
 const packages = fs
-  .readdirSync(path.resolve('./packages'))
+  .readdirSync(path.resolve(__dirname, '../packages'))
   .filter(
     p => !p.endsWith('.ts') && !p.endsWith('.md') && !p.startsWith('.'),
   )
   console.log(packages)
 
 async function main() {
-  return
   // upgrade by bumpp
   const { version } = await fs.readJSON('package.json')
 
