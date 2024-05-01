@@ -1,7 +1,7 @@
 {
   "name": "@kai2128/utils",
   "version": "0.0.0",
-  "packageManager": "pnpm@9.0.2",
+  "packageManager": "pnpm@9.0.4",
   "description": "utils",
   "author": "kai2128 <kaienyeo225@hotmail.com>",
   "license": "MIT",
