@@ -54,7 +54,7 @@ function updateDeps(pkg: any, depType: string, version: string) {
   const deps = pkg[depType]
   if (!deps)
     return
-  const pkgName = 'yunyoujun'
+  const pkgName = 'kai2128'
   Object.keys(deps).forEach((dep) => {
     if (
       dep === pkgName

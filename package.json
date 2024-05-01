@@ -13,17 +13,6 @@
     "url": "git+https://github.com/kai2128/utils.git"
   },
   "bugs": "https://github.com/kai2128/utils/issues",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./dist/index.d.ts"
-      ]
-    }
-  },
   "scripts": {
     "build": "nr -r build",
     "lint": "eslint .",
@@ -48,6 +37,7 @@
     "pnpm": "^9.0.2",
     "rimraf": "^5.0.5",
     "simple-git-hooks": "^2.11.1",
+    "tsx": "^4.8.2",
     "typescript": "^5.4.5",
     "unbuild": "^2.0.0",
     "vite": "^5.2.9",

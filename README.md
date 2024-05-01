@@ -11,14 +11,6 @@ my utils
 > **Note**:
 > Replace `@kai2128/utils`, `my utils` and `kai2128` globally to use this template.
 
-## Sponsors
-
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/kai2128/static/sponsors.svg">
-    <img src='https://cdn.jsdelivr.net/gh/kai2128/static/sponsors.svg'/>
-  </a>
-</p>
-
 ## License
 
 [MIT](./LICENSE) License © 2023-PRESENT [kai2128](https://github.com/kai2128)
