@@ -2,6 +2,7 @@ import path from 'node:path'
 import fs from 'node:fs'
 import consola from 'consola'
 import { $ } from 'zx'
+import { __dirname } from './release'
 
 export function getPkgRoot(pkg: string) {
   return path.resolve(__dirname, `../packages/${pkg}`)
