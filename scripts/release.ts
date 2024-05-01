@@ -9,12 +9,14 @@ import { getPkgRoot } from './utils'
  * get monorepo packages
  */
 const packages = fs
-  .readdirSync(path.resolve(__dirname, '../packages'))
+  .readdirSync(path.resolve('./packages'))
   .filter(
     p => !p.endsWith('.ts') && !p.endsWith('.md') && !p.startsWith('.'),
   )
+  console.log(packages)
 
 async function main() {
+  return
   // upgrade by bumpp
   const { version } = await fs.readJSON('package.json')
 
