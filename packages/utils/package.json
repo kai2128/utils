@@ -1,0 +1,47 @@
+{
+  "name": "@kai2128/utils",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.0.4",
+  "description": "utils",
+  "author": "kai2128 <kaienyeo225@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/kai2128/utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kai2128/utils.git"
+  },
+  "bugs": "https://github.com/kai2128/utils/issues",
+  "keywords": [
+    "utils",
+    "tampermonkey",
+    "greasemonkey",
+    "userscript"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "prepublishOnly": "nr build"
+  }
+}
