@@ -128,3 +128,30 @@ export function setStatusText(...text: unknown[]) {
     document.body.appendChild(status)
   }
 }
+
+export function useSessionStorage<T>() {
+  return {
+    set: (key: string, value: T) => {
+      const type = Object.prototype.toString.call(value)
+      let data
+      if (type === '[object Object]' || type === '[object Array]')
+        data = JSON.stringify(value)
+      else
+        data = value
+      sessionStorage.setItem(key, data as string)
+    },
+    get: (key: string) => {
+      const item = sessionStorage.getItem(key)
+      if (!item || item === 'null' || item === 'undefined')
+        return null
+
+      try {
+        return JSON.parse(item)
+      }
+      catch {
+        return item
+      }
+    },
+    remove: (key: string) => sessionStorage.removeItem(key),
+  }
+}
