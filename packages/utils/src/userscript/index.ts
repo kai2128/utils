@@ -3,31 +3,6 @@ export function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-export function useSessionStorage() {
-  return {
-    set: (key, value) => {
-      const type = Object.prototype.toString.call(value)
-      if (type === '[object Object]' || type === '[object Array]')
-        value = JSON.stringify(value)
-
-      sessionStorage.setItem(key, value)
-    },
-    get: (key) => {
-      const item = sessionStorage.getItem(key)
-      if (!item || item === 'null' || item === 'undefined')
-        return null
-
-      try {
-        return JSON.parse(item)
-      }
-      catch {
-        return item
-      }
-    },
-    remove: key => sessionStorage.removeItem(key),
-  }
-}
-
 export async function waitForPageReady(bufferTime = 2000, timeout = 30000) {
   // expect page to be ready in 30 seconds else refresh
   try {
