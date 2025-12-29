@@ -7,7 +7,7 @@ interface TaskHandlerOptions {
   username: string | (() => string)
 }
 
-export function useTaskHandler(options: TaskHandlerOptions, { prepareForTask = () => { }, processTaskHandler = () => { }, registerCustomEvent }: { prepareForTask?: (task: any) => void, processTaskHandler?: (task: any) => void | Promise<void>, registerEvent?: (eventSource: EventSource) => void } = {}) {
+export function useTaskHandler(options: TaskHandlerOptions, { prepareForTask = () => { }, processTaskHandler = () => { }, registerCustomEvent = () => { } }: { prepareForTask?: (task: any) => void, processTaskHandler?: (task: any) => void | Promise<void>, registerCustomEvent?: (eventSource: EventSource) => void } = {}) {
   const { serverUrl, type } = options
   let eventSource: EventSource | null = null
   function getUsername() {
@@ -32,8 +32,8 @@ export function useTaskHandler(options: TaskHandlerOptions, { prepareForTask = (
     const params = new URLSearchParams(filteredParamsObj)
     eventSource = new EventSource(`${serverUrl}/client/listen?${params.toString()}`)
 
-    const taskHandler = (event) => {
-      eventSource.close()
+    const taskHandler = (event: any) => {
+      eventSource?.close()
       handleTask(event)
     }
     if (clientId)
@@ -44,7 +44,7 @@ export function useTaskHandler(options: TaskHandlerOptions, { prepareForTask = (
       clientId = client.id
       console.log('registered', clientId)
       useSessionStorage().set('client-id', clientId)
-      eventSource.addEventListener(`client-${clientId}`, taskHandler)
+      eventSource?.addEventListener(`client-${clientId}`, taskHandler)
       console.log(`client ${clientId} ${getUsername()} listening for task...`)
       setStatusText(`client ${clientId} ${getUsername()} listening for task...`)
     })
@@ -61,7 +61,7 @@ export function useTaskHandler(options: TaskHandlerOptions, { prepareForTask = (
       registerCustomEvent(eventSource)
   }
 
-  async function handleTask(event) {
+  async function handleTask(event: any) {
     // console.log('handleTask', event.data)
     setStatusText('handle task', event.data)
     const task = JSON.parse(event.data)
@@ -106,7 +106,7 @@ export function useTaskHandler(options: TaskHandlerOptions, { prepareForTask = (
         setTimeout(listenMessage, 5000)
       }
     },
-    registerHandler: (preProcessHandler, taskHandler) => {
+    registerHandler: (preProcessHandler: (task: any) => void, taskHandler: (task: any) => void | Promise<void>) => {
       processTaskHandler = taskHandler
       prepareForTask = preProcessHandler
     },
