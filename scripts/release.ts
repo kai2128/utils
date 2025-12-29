@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 
 import consola from 'consola'
 import { $ } from 'zx'
-import { getPkgRoot } from './utils'
+import { getPkgRoot, publishPackage } from './utils'
 
 const __filename = fileURLToPath(import.meta.url) // get the resolved path to the file
 export const __dirname = path.dirname(__filename) // get the name of the directory
@@ -17,7 +17,7 @@ const packages = fs
   .filter(
     p => !p.endsWith('.ts') && !p.endsWith('.md') && !p.startsWith('.'),
   )
-  console.log(packages)
+console.log(packages)
 
 async function main() {
   // upgrade by bumpp
@@ -35,8 +35,8 @@ async function main() {
   // publish package
   console.log()
   consola.debug('Publishing packages...')
-  // for (const pkg of packages)
-  //   await publishPackage(pkg, targetVersion)
+  for (const pkg of packages)
+    await publishPackage(pkg, targetVersion)
 }
 
 function updateVersions(version: string) {

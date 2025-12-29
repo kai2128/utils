@@ -1,3 +1,45 @@
+/* eslint-disable no-console */
+export function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+export function useSessionStorage() {
+  return {
+    set: (key, value) => {
+      const type = Object.prototype.toString.call(value)
+      if (type === '[object Object]' || type === '[object Array]')
+        value = JSON.stringify(value)
+
+      sessionStorage.setItem(key, value)
+    },
+    get: (key) => {
+      const item = sessionStorage.getItem(key)
+      if (!item || item === 'null' || item === 'undefined')
+        return null
+
+      try {
+        return JSON.parse(item)
+      }
+      catch {
+        return item
+      }
+    },
+    remove: key => sessionStorage.removeItem(key),
+  }
+}
+
+export async function waitForPageReady(bufferTime = 2000, timeout = 30000) {
+  // expect page to be ready in 30 seconds else refresh
+  try {
+    await new Promise(resolve => setTimeout(resolve, bufferTime)) // wait for some more time for the page load
+    await waitUntil(() => document.readyState === 'complete', () => { }, timeout)
+  }
+  catch (_) {
+    console.log(`timeout waiting element, refreshing page...`)
+    setTimeout(() => window.location.reload(), 1000)
+  }
+}
+
 export function waitForSecond(ms: number) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms)
@@ -70,18 +112,6 @@ export function waitForElm(selector: string, timeout = 0): Promise<Element | nul
       subtree: true,
     })
   })
-}
-
-export async function waitForPageReady(bufferTime = 3000, timeout = -1) {
-  try {
-    await waitUntil(() => document.readyState === 'complete', undefined, timeout)
-    await waitForSecond(bufferTime) // wait for some more time to make sure the page is fully loaded
-  }
-  catch (_) {
-    // eslint-disable-next-line no-console
-    console.log(`timeout waiting element, refreshing page...`)
-    setTimeout(() => window.location.reload(), 1000)
-  }
 }
 
 export async function getInnerText(selector: string) {
