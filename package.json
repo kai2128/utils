@@ -1,7 +1,7 @@
 {
   "name": "@kai2128/utils",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@9.0.4",
   "description": "utils",
