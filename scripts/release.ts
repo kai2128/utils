@@ -36,7 +36,7 @@ async function main() {
   console.log()
   consola.debug('Publishing packages...')
   for (const pkg of packages)
-    await publishPackage(pkg, targetVersion)
+    await publishPackage(pkg, version)
 }
 
 function updateVersions(version: string) {
